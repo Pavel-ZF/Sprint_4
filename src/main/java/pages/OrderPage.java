@@ -1,9 +1,7 @@
 package pages;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -44,9 +42,6 @@ public class OrderPage {
     private final By rentalPeriodInput = By.xpath(".//*[@class='Dropdown-arrow']");
 
     //выпадающий список Срок аренды
-    private final By rentalPeriodList = By.xpath(".//*[@class='Dropdown-menu' and @aria-expanded='true']");
-    private final By periodListItem = By.xpath(".//*[@class='Dropdown-option']");
-    private final By periodListItem1 = By.xpath(".//*[@class='Dropdown-option' and text()='двое суток']");
     private final By[] periodListItems = new By[]{By.xpath(".//*[@class='Dropdown-option' and text()='сутки']"), By.xpath(".//*[@class='Dropdown-option' and text()='двое суток']"), By.xpath(".//*[@class='Dropdown-option' and text()='трое суток']"), By.xpath(".//*[@class='Dropdown-option' and text()='четверо суток']"), By.xpath(".//*[@class='Dropdown-option' and text()='пятеро суток']"), By.xpath(".//*[@class='Dropdown-option' and text()='шестеро суток']"), By.xpath(".//*[@class='Dropdown-option' and text()='семеро суток']")};
 
     //чекбокс серый цвет
@@ -77,48 +72,45 @@ public class OrderPage {
     //Заполнения поля Имя
     public void setCustomerName(String custName) {
         driver.findElement(customerName).sendKeys(custName);
-
     }
+
     //Заполнения поля Фамилия
     public void setCustomerFamilyname(String custFamilyname) {
         driver.findElement(customerFamilyname).sendKeys(custFamilyname);
-
     }
+
     //Заполнения поля Адрес
     public void setAddress(String custAddr) {
         driver.findElement(address).sendKeys(custAddr);
     }
+
     //Клика по полю Станция метро
     public void clickMetroStationInput() {
         driver.findElement(metroStationInput).click();
-
     }
+
     //Клика по значению в выпадающем списке станции метро
     public void searchMetroStation(String station) throws InterruptedException {
         driver.findElement(metroStationInput).click();
         Thread.sleep(500);
         driver.findElement(stationList).sendKeys(station, Keys.ARROW_DOWN, Keys.ENTER);
     }
+
     //Заполнения поля Телефон
     public void setPhone(String custPhone) {
         driver.findElement(phone).sendKeys(custPhone);
     }
+
     //Клик по кнопке Далее
     public void clickBtnNext() {
         driver.findElement(btnNext).click();
-
     }
+
     // Проверка что форма "Про аренду" отображается
     public void isContainerRentalFormVisible() {
         driver.findElement(containerRentalForm).isDisplayed();
     }
 
-    /* Метод пока не используется. Оставляю для себя
-   // Ввод даты заказа самоката в поле текстом
-   public OrderPage clickDeliveryDate() {
-           driver.findElement(deliveryDate).click();
-           return this;
-           } */
     //Метод для указания сегодняшней даты в поле "Когда привезти самокат" текстом
     public void setTodayDateInInput() {
         driver.findElement(deliveryDateInput).click(); //кликаем в поле "Когда привезти самокат
@@ -131,7 +123,6 @@ public class OrderPage {
     //Метод для выбора сегодняшней даты в календаре поля "Когда привезти самокат"
     public void setTodayDateInCalendar() {
         driver.findElement(deliveryDateCalendar).click();
-
     }
 
     //Клик по полю Срок аренды
@@ -144,43 +135,34 @@ public class OrderPage {
                 break;
             }
         }
-
-        // Оставил для себя. Хочу разобраться потом как реализовать такой вариант
-        //driver.findElement(rentalPeriodInput).click();// кликнули по полю "Срок аренды"
-        //Thread.sleep(500L);
-        //Select drpRentalList = new Select(driver.findElement(rentalPeriodList));//Создали объект списка периодов срока аренды
-       // drpRentalList.selectByIndex(1);// Выбираем в списке 1 период. Можно улучшить и передавать в метод например желаемый срок
-       // return this;
     }
 
     //клик по чекбоксу цвета
     public void clickSetColour(String colour) {
         //ищем нужный цвет
-        if (colour == "серый") {
+        if (colour.equals("серый")) {
             driver.findElement(checkboxGreyColour).click();
         } else {
             driver.findElement(checkboxBlackColour).click();
         }
-
     }
 
     //указываем комментарий
     public void setComment(String custComm) {
         driver.findElement(comment).sendKeys(custComm);
-
     }
 
-    //клика по кнопке Заказать
+    //клик по кнопке Заказать
     public void clickBtnOrder() {
         driver.findElement(btnOrder).click();
-
     }
-
+    // Клик по кнопке подтверждения
     public void clickBtnYesConfirmationOrderPopup() {
         if (this.driver.findElement(this.confirmationOrderPopup).isDisplayed()) {
             this.driver.findElement(this.btnYesConfirmationOrderPopup).click();
         }
     }
+    // Проверка что попап отображается
     public void isSuccessfulOrderPopupVisible() {
         driver.findElement(successOrderPopup).isDisplayed(); }
 }
